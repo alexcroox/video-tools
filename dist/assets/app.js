@@ -31,7 +31,7 @@ ffmpeg.ffprobe(path.join(__dirname, '/videos/video.mp4'), function(err, metadata
 
         console.log(width, height);
 
-        //process(width, height);
+        process(width, height);
     }
 });
 
@@ -54,14 +54,22 @@ document.body.ondrop = function(ev) {
 function process(width, height) {
 
     ffmpeg()
-        .input(path.join(__dirname, '/videos/video.mp4'))
-        .input(path.join(__dirname, '/videos/intro.mov'))
+        .on('start', function(command) {
+            console.log('starting');
+        })
         .on('progress', function(progress) {
             console.log(progress);
         })
         .on('error', function(err, stdout, stderr) {
             console.log('Cannot process video: ' + err.message);
         })
+        .on('end', function(stdout, stderr) {
+            console.log('Transcoding succeeded !');
+        })
+        .input(path.join(__dirname, '/videos/video.mp4'))
+        .seekInput(2)
+        .duration(4)
+        .input(path.join(__dirname, '/videos/intro.mov'))
         .complexFilter([
             '[0:v]setpts=PTS-STARTPTS,scale=' + width + 'x ' + height + '[top];[1:v]setpts=PTS-STARTPTS,scale=1920x1080[bottom];[top][bottom]overlay=x=(W-w)/2:eof_action=pass'
         ])
