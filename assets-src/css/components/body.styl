@@ -1,6 +1,22 @@
-body
-    background $bgColor
+html
+    width 100%
+    height 100%
 
-nav
-    background $headerColor
-    background linear-gradient(to left, #1e3c72 , #2a5298)
+*
+    -webkit-font-smoothing antialiased
+    -moz-osx-font-smoothing grayscale
+
+body
+    width 100%
+    height 100%
+    font-size 17px
+    background #f2f2f2
+    border 1px solid #363636
+    padding-top $headerHeight
+    font-family 'Open Sans', sans-serif
+    font-weight 400
+    overflow-x hidden
+    -webkit-overflow-scrolling touch
+
+body.dropping
+    background #000

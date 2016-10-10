@@ -25,6 +25,7 @@ paths.css = './assets-src/css';
 paths.js = './assets-src/js';
 paths.images = './assets-src/images';
 paths.fonts = './assets-src/fonts';
+paths.videos = './assets-src/videos';
 
 gulp.task('js-third-party', function() {
 
@@ -93,11 +94,17 @@ gulp.task('fonts', function () {
         .pipe(gulp.dest(paths.dist + '/fonts'));
 });
 
+gulp.task('videos', function () {
+
+    return gulp.src(paths.videos + '/**/*')
+        .pipe(gulp.dest(paths.dist + '/videos'));
+});
+
 gulp.task('clean', function() {
     return del(path.join(paths.dist, '*'));
 });
 
-gulp.task('all', sequence('clean', ['css', 'js', 'js-third-party']));
+gulp.task('all', sequence('clean', ['css', 'js', 'videos']));
 
 // Run everything but watch it after too
 gulp.task('default', ['all'], function() {
