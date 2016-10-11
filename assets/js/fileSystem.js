@@ -2,6 +2,8 @@ function FileSystem() {
 
     console.log('Init FileSystem');
     this.dropZone = $('.drop-zone');
+    this.rawPath = remote.app.getPath('videos');
+    this.processedPath = remote.app.getPath('documents');
 }
 
 FileSystem.prototype.setupInteractionHandlers = function() {
@@ -10,10 +12,43 @@ FileSystem.prototype.setupInteractionHandlers = function() {
 
     console.log('this', this);
 
+    $('.filesystem-open').on('click', function(e) {
+
+        e.preventDefault();
+
+        var folderPath = '';
+
+        switch($(this).attr('data-path')) {
+            case "raw":
+                folderPath = self.rawPath;
+                break;
+
+            case "processed":
+                folderPath = self.processedPath;
+                break;
+        }
+
+        remote.shell.showItemInFolder(folderPath + '/blank');
+    });
+
+    $('.drop-zone').on('click', function(e) {
+
+        e.preventDefault();
+
+        remote.dialog.showOpenDialog({
+            title: 'Find your video file',
+            defaultPath: self.rawPath,
+            filters: [
+                { name: 'Arma Vids', extensions: ['mkv', 'avi', 'mp4', 'mov'] }
+            ]
+        });
+    });
+
     this.dropZone.on('dragenter dragover', function(e) {
         e.preventDefault();
 
         console.log('dragging');
+        self.dropZone.removeClass('drop-zone--error');
         self.dropZone.addClass('drop-zone--dropping');
     });
 
@@ -37,9 +72,10 @@ FileSystem.prototype.setupInteractionHandlers = function() {
 
             if(error) {
                 console.log('Not a video file?', error);
+                self.dropZone.addClass('drop-zone--error');
             } else {
 
-
+                video.ready();
             }
         });
     });

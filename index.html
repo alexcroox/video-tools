@@ -6,15 +6,38 @@
         <link rel="stylesheet" href="./assets/css/app.css">
     </head>
     <body>
-        <div class="header">
-            <span class="header__title">ARK Video Tools</span>
+        <div class="header clearfix">
+            <span class="header__title">ARK <span>Video Tools</span></span>
 
             <a href="#" class="header__exit"><i class="fa fa-times"></i></a>
             <a href="#" class="header__minimise"><i class="fa fa-minus"></i></a>
         </div>
         <div class="page page--active" id="main" data-page="main">
+            <div class="video-processing">
+                <h2>Add ARK Intro Sequence</h2>
+                <p class="intro">Drag and drop a video file below</p>
 
-            <div class="drop-zone"></div>
+                <div class="drop-zone">
+                    <div class="drop-zone__container">
+                        <img class="drop-zone__ring drop-zone__ring__icon" src="assets/images/file-upload.png">
+                        <div class="drop-zone__ring drop-zone__ring--inner"></div>
+                        <div class="drop-zone__ring drop-zone__ring--middle"></div>
+                        <div class="drop-zone__ring drop-zone__ring--outer"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <a class="button button--with-icon filesystem-open" data-path="raw">
+                <i class="fa fa-folder-open-o" aria-hidden="true"></i>
+                RAW
+            </a>
+            <a class="button button--with-icon filesystem-open" data-path="processed">
+                <i class="fa fa-folder-open-o" aria-hidden="true"></i>
+                Processed
+            </a>
+            <a href="#" class="footer__settings"><i class="fa fa-cog"></i></a>
         </div>
 
         <script>

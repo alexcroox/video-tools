@@ -11,11 +11,19 @@ function Video() {
     this.ffmpeg.setFfmpegPath('ffmpeg-builds/' + ffmpegPath + '/ffmpeg');
     this.ffmpeg.setFfprobePath('ffmpeg-builds/' + ffmpegPath + '/ffprobe');
     this.ffmpeg.setFlvtoolPath('ffmpeg-builds/' + ffmpegPath + '/ffplay');
+
+    this.videoProcessingContainer = $('.video-processing');
 }
 
 Video.prototype.setupInteractionHandlers = function() {
 
 
+};
+
+Video.prototype.ready = function() {
+
+    video.videoProcessingContainer.addClass('video-processing--ready');
+    fileSystem.dropZone.addClass('drop-zone--video-ready');
 };
 
 Video.prototype.getMeta = function(videoPath, cb) {

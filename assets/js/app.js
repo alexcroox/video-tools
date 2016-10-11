@@ -1,4 +1,5 @@
 const remote = require('electron').remote;
+const {dialog} = require('electron').remote;
 
 window.$ = window.jQuery = require('jquery');
 
@@ -27,4 +28,3 @@ $('.header__minimise').click(function(e) {
     var window = remote.getCurrentWindow();
     window.minimize();
 });
-

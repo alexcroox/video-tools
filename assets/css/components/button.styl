@@ -1,0 +1,38 @@
+.button
+    display inline-block
+    letter-spacing 0.01em
+    text-align center
+    vertical-align middle
+    cursor pointer
+    background #649192
+    border 1px solid transparent
+    white-space nowrap
+    padding 5px 15px
+    border-radius 4px
+    user-select none
+    font-size 14px
+    color #FFF
+    text-transform uppercase
+
+    &:hover
+        opacity .9
+
+    &.grey
+        background #CCC
+
+    &--with-icon
+        .fa
+            margin-right 3px
+
+    &.animated
+        .fa
+            animation rotate 2s linear infinite
+            -webkit-transform translate3d(0,0,0)
+            -webkit-backface-visibility hidden
+
+    &.disabled
+        background #CCC
+        cursor progress
+
+    &--right
+        float right
