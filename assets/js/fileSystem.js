@@ -36,7 +36,7 @@ FileSystem.prototype.setupInteractionHandlers = function() {
         video.getMeta(videoPath, function(error, meta) {
 
             if(error) {
-                console.log('Error getting video meta', error);
+                console.log('Not a video file?', error);
             } else {
 
 

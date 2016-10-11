@@ -36,7 +36,7 @@ FileSystem.prototype.setupInteractionHandlers = function() {
         video.getMeta(videoPath, function(error, meta) {
 
             if(error) {
-                console.log('Error getting video meta', error);
+                console.log('Not a video file?', error);
             } else {
 
 
@@ -54,9 +54,9 @@ function Video() {
     };
 
     this.ffmpeg = require('fluent-ffmpeg');
-    this.ffmpeg.setFfmpegPath('C:\/ffmpeg\/bin\/ffmpeg.exe');
-    this.ffmpeg.setFfprobePath('C:\/ffmpeg\/bin\/ffprobe.exe');
-    this.ffmpeg.setFlvtoolPath('C:\/ffmpeg\/bin\/ffplay.exe');
+    this.ffmpeg.setFfmpegPath('ffmpeg-builds/osx/ffmpeg');
+    this.ffmpeg.setFfprobePath('ffmpeg-builds/osx/ffprobe');
+    this.ffmpeg.setFlvtoolPath('ffmpeg-builds/osx/ffplay');
 }
 
 Video.prototype.setupInteractionHandlers = function() {
@@ -69,7 +69,6 @@ Video.prototype.getMeta = function(videoPath, cb) {
     this.ffmpeg.ffprobe(videoPath, function(err, metadata) {
 
         if (err) {
-            console.error(err);
             cb(err);
         } else {
             console.log(metadata);
@@ -77,6 +76,10 @@ Video.prototype.getMeta = function(videoPath, cb) {
             var height = 0;
             var width = 0;
             var duration = metadata.format.duration;
+
+            // Not a video file?
+            if(duration < 1)
+                return cb('Not a video file');
 
             _.each(metadata.streams, function(s) {
 
@@ -86,6 +89,8 @@ Video.prototype.getMeta = function(videoPath, cb) {
                 if(typeof s.width !== "undefined")
                     width = s.width;
             });
+
+            console.log(width, height);
 
             if(width == 0)
                 cb('Error getting dimensions');
