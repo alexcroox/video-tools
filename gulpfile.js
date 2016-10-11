@@ -28,13 +28,17 @@ gulp.task('css', function() {
 });
 
 gulp.task('js', function() {
-  return gulp.src([paths.js + '/*'])
-    .pipe(concat('combined.js'))
-    .pipe(gulp.dest(paths.js));
-});
 
+    return gulp.src([
+            paths.js + '/!(app)*.js',
+            paths.js + '/app.js'
+    ])
+    .pipe(concat('all.js'))
+    .pipe(gulp.dest('.'));
+});
 // Run everything but watch it after too
 gulp.task('default', ['css', 'js'], function() {
 
     gulp.watch([paths.css + '/**/*'], ['css']);
+    gulp.watch([paths.js + '/**/*'], ['js']);
 });

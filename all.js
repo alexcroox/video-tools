@@ -1,34 +1,3 @@
-const remote = require('electron').remote;
-
-window.$ = window.jQuery = require('jquery');
-
-// Third party libs
-var _ = require('underscore'),
-    $ = require('jquery'),
-    path = require('path');
-
-// Our app specific modules
-var fileSystem = new FileSystem(),
-    video = new Video();
-
-fileSystem.setupInteractionHandlers();
-video.setupInteractionHandlers();
-
-$('.header__exit').click(function(e) {
-    e.preventDefault();
-
-    var window = remote.getCurrentWindow();
-    window.close();
-});
-
-$('.header__minimise').click(function(e) {
-    e.preventDefault();
-
-    var window = remote.getCurrentWindow();
-    window.minimize();
-});
-
-
 function FileSystem() {
 
     console.log('Init FileSystem');
@@ -41,25 +10,30 @@ FileSystem.prototype.setupInteractionHandlers = function() {
 
     console.log('this', this);
 
-    this.dropZone.ondragover = function(e) {
+    this.dropZone.on('dragenter dragover', function(e) {
         e.preventDefault();
 
-        $('body').addClass('dropping');
-    }
+        console.log('dragging');
+        self.dropZone.addClass('drop-zone--dropping');
+    });
 
-    this.dropZone.ondragleave = function(e) {
+    this.dropZone.on('dragleave', function(e) {
 
-        $('body').removeClass('dropping');
-    }
+        console.log('leaving');
+        self.dropZone.removeClass('drop-zone--dropping');
+    });
 
-    this.dropZone.ondrop = function(e) {
+    this.dropZone.on('drop', function(e) {
+
         e.preventDefault();
+
+        self.dropZone.removeClass('drop-zone--dropping');
 
         // TODO: Multiple video drops?
-        var videoPath = e.dataTransfer.files[0].path;
+        var videoPath = e.originalEvent.dataTransfer.files[0].path;
         console.log('Getting meta for', videoPath);
 
-        self.getMeta(videoPath, function(error, meta) {
+        video.getMeta(videoPath, function(error, meta) {
 
             if(error) {
                 console.log('Error getting video meta', error);
@@ -68,7 +42,7 @@ FileSystem.prototype.setupInteractionHandlers = function() {
 
             }
         });
-    }
+    });
 };
 
 
@@ -154,4 +128,33 @@ Video.prototype.process = function(sourceMeta) {
         .run();
 }
 
-module.exports = Video;
+//const remote = require('electron').remote;
+
+window.$ = window.jQuery = require('jquery');
+
+// Third party libs
+var _ = require('underscore'),
+    $ = require('jquery'),
+    path = require('path');
+
+// Our app specific modules
+var fileSystem = new FileSystem(),
+    video = new Video();
+
+fileSystem.setupInteractionHandlers();
+video.setupInteractionHandlers();
+
+$('.header__exit').click(function(e) {
+    e.preventDefault();
+
+    var window = remote.getCurrentWindow();
+    window.close();
+});
+
+$('.header__minimise').click(function(e) {
+    e.preventDefault();
+
+    var window = remote.getCurrentWindow();
+    window.minimize();
+});
+

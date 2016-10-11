@@ -1,4 +1,4 @@
-const remote = require('electron').remote;
+//const remote = require('electron').remote;
 
 window.$ = window.jQuery = require('jquery');
 

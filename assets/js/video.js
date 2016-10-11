@@ -79,5 +79,3 @@ Video.prototype.process = function(sourceMeta) {
         .output('C:/video/combined.mp4')
         .run();
 }
-
-module.exports = Video;
