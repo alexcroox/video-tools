@@ -6,8 +6,8 @@
  * -------------------------- */
 @font-face {
   font-family: 'FontAwesome';
-  src: url('fonts/font-awesome/fontawesome-webfont.eot?v=4.6.3');
-  src: url('fonts/font-awesome/fontawesome-webfont.eot?#iefix&v=4.6.3') format('embedded-opentype'), url('fonts/font-awesome/fontawesome-webfont.woff2?v=4.6.3') format('woff2'), url('fonts/font-awesome/fontawesome-webfont.woff?v=4.6.3') format('woff'), url('fonts/font-awesome/fontawesome-webfont.ttf?v=4.6.3') format('truetype'), url('fonts/font-awesome/fontawesome-webfont.svg?v=4.6.3#fontawesomeregular') format('svg');
+  src: url('../fonts/font-awesome/fontawesome-webfont.eot?v=4.6.3');
+  src: url('../fonts/font-awesome/fontawesome-webfont.eot?#iefix&v=4.6.3') format('embedded-opentype'), url('fonts/font-awesome/fontawesome-webfont.woff2?v=4.6.3') format('woff2'), url('fonts/font-awesome/fontawesome-webfont.woff?v=4.6.3') format('woff'), url('fonts/font-awesome/fontawesome-webfont.ttf?v=4.6.3') format('truetype'), url('fonts/font-awesome/fontawesome-webfont.svg?v=4.6.3#fontawesomeregular') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -2196,4 +2196,365 @@
   margin: 0;
   overflow: visible;
   clip: auto;
+}
+
+
+/* Functional styling;
+ * These styles are required for noUiSlider to function.
+ * You don't need to change these rules to apply your design.
+ */
+.noUi-target,
+.noUi-target * {
+-webkit-touch-callout: none;
+-webkit-user-select: none;
+-ms-touch-action: none;
+    touch-action: none;
+-ms-user-select: none;
+-moz-user-select: none;
+    user-select: none;
+-moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.noUi-target {
+    position: relative;
+    direction: ltr;
+}
+.noUi-base {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 1; /* Fix 401 */
+}
+.noUi-origin {
+    position: absolute;
+    right: 0;
+    top: 0;
+    left: 0;
+    bottom: 0;
+}
+.noUi-handle {
+    position: relative;
+    z-index: 1;
+}
+.noUi-stacking .noUi-handle {
+/* This class is applied to the lower origin when
+   its values is > 50%. */
+    z-index: 10;
+}
+.noUi-state-tap .noUi-origin {
+-webkit-transition: left 0.3s, top 0.3s;
+    transition: left 0.3s, top 0.3s;
+}
+.noUi-state-drag * {
+    cursor: inherit !important;
+}
+
+/* Painting and performance;
+ * Browsers can paint handles in their own layer.
+ */
+.noUi-base,
+.noUi-handle {
+    -webkit-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+}
+
+/* Slider size and handle placement;
+ */
+.noUi-horizontal {
+    height: 18px;
+}
+.noUi-horizontal .noUi-handle {
+    width: 34px;
+    height: 28px;
+    left: -17px;
+    top: -6px;
+}
+.noUi-vertical {
+    width: 18px;
+}
+.noUi-vertical .noUi-handle {
+    width: 28px;
+    height: 34px;
+    left: -6px;
+    top: -17px;
+}
+
+/* Styling;
+ */
+.noUi-background {
+    background: #FAFAFA;
+    box-shadow: inset 0 1px 1px #f0f0f0;
+}
+.noUi-connect {
+    background: #3FB8AF;
+    box-shadow: inset 0 0 3px rgba(51,51,51,0.45);
+-webkit-transition: background 450ms;
+    transition: background 450ms;
+}
+.noUi-origin {
+    border-radius: 2px;
+}
+.noUi-target {
+    border-radius: 4px;
+    border: 1px solid #D3D3D3;
+    box-shadow: inset 0 1px 1px #F0F0F0, 0 3px 6px -5px #BBB;
+}
+.noUi-target.noUi-connect {
+    box-shadow: inset 0 0 3px rgba(51,51,51,0.45), 0 3px 6px -5px #BBB;
+}
+
+/* Handles and cursors;
+ */
+.noUi-draggable {
+    cursor: w-resize;
+}
+.noUi-vertical .noUi-draggable {
+    cursor: n-resize;
+}
+.noUi-handle {
+    border: 1px solid #D9D9D9;
+    border-radius: 3px;
+    background: #FFF;
+    cursor: default;
+    box-shadow: inset 0 0 1px #FFF,
+                inset 0 1px 7px #EBEBEB,
+                0 3px 6px -3px #BBB;
+}
+.noUi-active {
+    box-shadow: inset 0 0 1px #FFF,
+                inset 0 1px 7px #DDD,
+                0 3px 6px -3px #BBB;
+}
+
+/* Handle stripes;
+ */
+.noUi-handle:before,
+.noUi-handle:after {
+    content: "";
+    display: block;
+    position: absolute;
+    height: 14px;
+    width: 1px;
+    background: #E8E7E6;
+    left: 14px;
+    top: 6px;
+}
+.noUi-handle:after {
+    left: 17px;
+}
+.noUi-vertical .noUi-handle:before,
+.noUi-vertical .noUi-handle:after {
+    width: 14px;
+    height: 1px;
+    left: 6px;
+    top: 14px;
+}
+.noUi-vertical .noUi-handle:after {
+    top: 17px;
+}
+
+/* Disabled state;
+ */
+[disabled].noUi-connect,
+[disabled] .noUi-connect {
+    background: #B8B8B8;
+}
+[disabled].noUi-origin,
+[disabled] .noUi-handle {
+    cursor: not-allowed;
+}
+
+html {
+  width: 100%;
+  height: 100%;
+}
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+body {
+  width: 100%;
+  height: 100%;
+  font-size: 17px;
+  background: #f2f2f2;
+  border: 1px solid #363636;
+  padding-top: 40px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+.drop-zone {
+  display: block;
+  width: 90%;
+  height: 400px;
+  border: 1px dotted #000;
+}
+.drop-zone--dropping {
+  background: #000;
+}
+.header {
+  background: #000;
+  position: fixed;
+  height: 40px;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  -webkit-app-region: drag;
+}
+.header__title {
+  color: #fff;
+  font-weight: 700;
+  font-size: 22px;
+  text-shadow: none;
+  font-family: 'Open Sans', sans-serif;
+  left: 20px;
+  top: 48%;
+  transform: translateY(-50%);
+  position: absolute;
+}
+.header__exit,
+.header__minimise {
+  float: right;
+  display: block;
+  font-size: 14px;
+  height: 40px;
+  color: #ededed;
+  -webkit-app-region: no-drag;
+  position: relative;
+  width: 25px;
+}
+.header__exit .fa,
+.header__minimise .fa {
+  position: absolute;
+  top: 50%;
+  left: auto;
+  right: 5px;
+  transform: translateY(-50%);
+}
+.header__exit {
+  width: 38px;
+}
+.header__exit .fa {
+  top: 49.5%;
+  left: 5px;
+  right: auto;
+}
+.page {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 40px;
+  display: none;
+}
+.page--active {
+  display: block;
+}
+html,
+body,
+div,
+span,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+font,
+img,
+ins,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+strong {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-weight: inherit;
+  font-style: inherit;
+  font-size: 100%;
+  font-family: inherit;
+  text-decoration: none;
+  vertical-align: baseline;
+}
+:focus,
+:active {
+  outline: 0;
+}
+ol,
+ul {
+  list-style: none;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
+}
+a {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+a:hover {
+  opacity: 1;
+}
+html {
+  font-size: 100%;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: rgba(255,255,255,0);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.nocallout {
+  -webkit-touch-callout: none;
+}
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+.clearfix:after {
+  clear: both;
+}
+.text-link {
+  color: #546e7a;
+  position: relative;
+}
+.text-link--with-icon .fa {
+  display: inline-block;
+  margin-right: 13px;
 }

@@ -3,16 +3,22 @@
     <head>
         <meta charset="UTF-8">
         <title>ARK Video Tools</title>
-        <link rel="stylesheet" href="./dist/assets/app.css">
+        <link rel="stylesheet" href="./assets/css/app.css">
     </head>
     <body>
-        <nav>
-            <h1>ARK Video Tools</h1>
-        </nav>
-    </body>
+        <div class="header">
+            <span class="header__title">ARK Video Tools</span>
 
-    <script>
-        //require('./dist/assets/app-third-party.min.js');
-        require('./dist/assets/app.js');
-    </script>
+            <a href="#" class="header__exit"><i class="fa fa-times"></i></a>
+            <a href="#" class="header__minimise"><i class="fa fa-minus"></i></a>
+        </div>
+        <div class="page page--active" id="main" data-page="main">
+
+            <div class="drop-zone"></div>
+        </div>
+
+        <script>
+            require('./assets/js/combined.js');
+        </script>
+    </body>
 </html>

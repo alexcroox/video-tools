@@ -1,0 +1,46 @@
+.header
+    background #000
+    position fixed
+    height $headerHeight
+    top 0
+    left 0
+    right 0
+    z-index 999
+    -webkit-app-region drag
+
+.header__title
+    color #fff
+    font-weight 700
+    font-size 22px
+    text-shadow none
+    font-family 'Open Sans', sans-serif
+    left 20px
+    top 48%
+    transform translateY(-50%)
+    position absolute
+
+.header__exit
+.header__minimise
+    float right
+    display block
+    font-size 14px
+    height $headerHeight
+    color #EDEDED
+    -webkit-app-region no-drag
+    position relative
+    width 25px
+
+    .fa
+        position absolute
+        top 50%
+        left auto
+        right 5px
+        transform translateY(-50%)
+
+.header__exit
+    width 38px
+
+    .fa
+        top 49.5%
+        left 5px
+        right auto
