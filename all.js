@@ -53,10 +53,12 @@ function Video() {
         height: 1080
     };
 
+    var ffmpegPath = (process.platform === "darwin")? 'osx' : 'windows';
+
     this.ffmpeg = require('fluent-ffmpeg');
-    this.ffmpeg.setFfmpegPath('ffmpeg-builds/osx/ffmpeg');
-    this.ffmpeg.setFfprobePath('ffmpeg-builds/osx/ffprobe');
-    this.ffmpeg.setFlvtoolPath('ffmpeg-builds/osx/ffplay');
+    this.ffmpeg.setFfmpegPath('ffmpeg-builds/' + ffmpegPath + '/ffmpeg');
+    this.ffmpeg.setFfprobePath('ffmpeg-builds/' + ffmpegPath + '/ffprobe');
+    this.ffmpeg.setFlvtoolPath('ffmpeg-builds/' + ffmpegPath + '/ffplay');
 }
 
 Video.prototype.setupInteractionHandlers = function() {
@@ -133,7 +135,7 @@ Video.prototype.process = function(sourceMeta) {
         .run();
 }
 
-//const remote = require('electron').remote;
+const remote = require('electron').remote;
 
 window.$ = window.jQuery = require('jquery');
 
