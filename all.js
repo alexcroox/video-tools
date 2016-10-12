@@ -31,6 +31,12 @@ FileSystem.prototype.setupInteractionHandlers = function() {
         remote.shell.showItemInFolder(folderPath + '/blank');
     });
 
+    $('.trigger-file-input').click(function(e) {
+        e.preventDefault();
+
+        $(this).parent().find('.file').click();
+    });
+
     $('.drop-zone').on('click', function(e) {
 
         e.preventDefault();
@@ -81,6 +87,70 @@ FileSystem.prototype.setupInteractionHandlers = function() {
     });
 };
 
+
+function Page() {
+
+    console.log('Init Page');
+    this.dropZone = $('.drop-zone');
+    this.rawPath = remote.app.getPath('videos');
+    this.processedPath = remote.app.getPath('documents');
+}
+
+Page.prototype.setupInteractionHandlers = function() {
+
+    $('.page-switch').click(function(e) {
+
+        e.preventDefault();
+
+        page.switch($(this).attr('data-page-target'));
+    });
+
+    $('.toggle-settings').click(function(e) {
+
+        e.preventDefault();
+
+        if($('#settings').hasClass('page--active')) {
+            $('.footer__settings').removeClass('footer__settings--active');
+            page.switch('main');
+        } else {
+            $('.footer__settings').addClass('footer__settings--active');
+            page.switch('settings');
+        }
+    });
+};
+
+Page.prototype.switch = function(pageId) {
+
+    $('.page--active').removeClass('page--active');
+    $('#' + pageId).addClass('page--active');
+
+    $('.header__title').text($('.page--active').attr('data-title'));
+
+    $('.scroll').animate({ scrollTop: 0 }, 100);
+};
+
+function Preferences() {
+
+}
+
+Preferences.prototype.setupInteractionHandlers = function() {
+
+    $('.page-switch').click(function(e) {
+
+        e.preventDefault();
+
+    });
+};
+
+Preferences.prototype.init = function() {
+
+    console.log(config.all());
+
+    if(config.has('pref-show-source-folder'))
+        $('#pref-show-source-folder').prop('checked', config.get('pref-show-source-folder'));
+    else
+        $('#pref-show-source-folder').prop('checked', true);
+};
 
 function Video() {
 
@@ -181,6 +251,7 @@ Video.prototype.process = function(sourceMeta) {
 
 const remote = require('electron').remote;
 const {dialog} = require('electron').remote;
+const config = require('electron-json-config');
 
 window.$ = window.jQuery = require('jquery');
 
@@ -191,10 +262,15 @@ var _ = require('underscore'),
 
 // Our app specific modules
 var fileSystem = new FileSystem(),
-    video = new Video();
+    video = new Video(),
+    page = new Page(),
+    preferences = new Preferences();
 
 fileSystem.setupInteractionHandlers();
 video.setupInteractionHandlers();
+page.setupInteractionHandlers();
+preferences.setupInteractionHandlers();
+preferences.init();
 
 $('.header__exit').click(function(e) {
     e.preventDefault();

@@ -1,5 +1,6 @@
 const remote = require('electron').remote;
 const {dialog} = require('electron').remote;
+const config = require('electron-json-config');
 
 window.$ = window.jQuery = require('jquery');
 
@@ -10,10 +11,15 @@ var _ = require('underscore'),
 
 // Our app specific modules
 var fileSystem = new FileSystem(),
-    video = new Video();
+    video = new Video(),
+    page = new Page(),
+    preferences = new Preferences();
 
 fileSystem.setupInteractionHandlers();
 video.setupInteractionHandlers();
+page.setupInteractionHandlers();
+preferences.setupInteractionHandlers();
+preferences.init();
 
 $('.header__exit').click(function(e) {
     e.preventDefault();

@@ -31,6 +31,12 @@ FileSystem.prototype.setupInteractionHandlers = function() {
         remote.shell.showItemInFolder(folderPath + '/blank');
     });
 
+    $('.trigger-file-input').click(function(e) {
+        e.preventDefault();
+
+        $(this).parent().find('.file').click();
+    });
+
     $('.drop-zone').on('click', function(e) {
 
         e.preventDefault();
