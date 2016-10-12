@@ -39,7 +39,7 @@ FileSystem.prototype.setupInteractionHandlers = function() {
             title: 'Find your video file',
             defaultPath: self.rawPath,
             filters: [
-                { name: 'Arma Vids', extensions: ['mkv', 'avi', 'mp4', 'mov'] }
+                { name: 'Arma Vids', extensions: ['mkv', 'avi', 'mp4', 'mov', 'flv'] }
             ]
         });
     });
