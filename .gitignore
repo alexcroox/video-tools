@@ -2,3 +2,4 @@ node_modules
 dist
 ffmpeg-builds
 ffmpeg-builds.zip
+app/assets

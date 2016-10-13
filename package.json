@@ -1,16 +1,31 @@
 {
   "name": "video-tools",
-  "version": "1.0.0",
   "description": "Video Tools",
   "main": "main.js",
-  "scripts": {
-    "start": "electron ."
+  "build": {
+    "appId": "com.titan.videotools",
+    "win": {
+      "iconUrl": "https://cl.ly/hm65/d",
+      "remoteReleases": "https://github.com/alexcroox/video-tools",
+      "publish": [
+        "github"
+      ]
+    }
   },
-  "repository": "https://github.com/electron/electron-quick-start",
-  "author": "Titan",
+  "scripts": {
+    "postinstall": "install-app-deps",
+    "start": "npm install && gulp assets && electron ./app",
+    "pack": "gulp assets && npm run build --dir",
+    "dist": "gulp assets && npm run build",
+    "release": "gulp assets && npm run build"
+  },
+  "repository": "https://github.com/alexcroox/video-tools",
+  "author": "alexcroox",
   "license": "MIT",
   "devDependencies": {
     "electron": "^1.4.1",
+    "electron-builder": "^7.13.0",
+    "electron-winstaller": "^2.3.4",
     "gulp": "^3.9.0",
     "gulp-buffer": "0.0.2",
     "gulp-concat": "^2.6.0",
@@ -19,13 +34,9 @@
     "gulp-sequence": "^0.4.5",
     "gulp-stylus": "^2.0.5",
     "gulp-util": "^3.0.6",
+    "rimraf": "^2.5.4",
     "rupture": "^0.6.1",
     "watchify": "^3.2.3"
   },
-  "dependencies": {
-    "electron-json-config": "^1.4.0",
-    "fluent-ffmpeg": "^2.1.0",
-    "jquery": "^3.1.1",
-    "underscore": "^1.8.3"
-  }
+  "postinstall": "install-app-deps"
 }
