@@ -3,3 +3,4 @@ dist
 ffmpeg-builds
 ffmpeg-builds.zip
 app/assets
+*.p12
